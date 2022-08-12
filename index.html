@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face id</title>
+    <link rel="stylesheet" href="assets/bootstrap5.2/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 justify-content-center align-items-center text-center">
+                <span class="errorMsg"></span>
+                <div class="camera">
+                    <video id="video" playsinline width="640" height="480" autoplay> </video>
+                </div>
+                <div class="btn-group justify-content-between">
+                    <button class="btn btn-primary" id="start">Start camera</button>
+                    <button class="btn btn-success" id="capture">Capture</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="my_camera" style="width: 320px; height: 240px; border: 1px solid black;"></div>
+    <input type=button value="Take Snapshot" onclick="take_snapshot()">
+
+    <div id="results"></div>
+
+    <!-- Webcam.min.js -->
+    <!-- <script type="text/javascript" src="webcamjs/webcam.min.js"></script> -->
+
+    <!-- Configure a few settings and attach camera -->
+    <script src="assets/bootstrap5.2/jquery.min.js"></script>
+    <script src="assets/bootstrap5.2/bootstrap.bundle.min.js"></script>
+    <script src="js/capture.js"></script>
+    <script src="./webcam.min.js"></script>
+    <script>
+        Webcam.set({
+            width: 320,
+            height: 240,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        Webcam.attach('#my_camera');
+
+        function take_snapshot() {
+
+            // take snapshot and get image data
+            Webcam.snap(function (data_uri) {
+                // display results in page
+                document.getElementById('results').innerHTML =
+                    '<img src="' + data_uri + '"/>';
+            });
+        }
+    </script>
+</body>
+
+</html>
